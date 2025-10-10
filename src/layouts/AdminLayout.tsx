@@ -1,7 +1,8 @@
 import { Outlet } from 'react-router-dom';
 import { SidebarInset, SidebarProvider } from '~/components/ui/sidebar';
-import { AppSidebar } from '~/components/sidebar';
 import { SiteHeader } from '~/components/SideHeader';
+import { AppSidebar } from '~/components/Sidebar';
+import { Suspense } from '~/routes/lazy';
 
 export default function AdminLayout() {
     return (
@@ -20,7 +21,9 @@ export default function AdminLayout() {
                     <div className='@container/main flex flex-1 flex-col gap-2'>
                         <div className='flex flex-col gap-4 py-4 md:gap-6 md:py-6'>
                             <div className='px-4 lg:px-6'>
-                                <Outlet />
+                                <Suspense>
+                                    <Outlet />
+                                </Suspense>
                             </div>
                         </div>
                     </div>

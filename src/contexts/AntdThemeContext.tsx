@@ -1,6 +1,6 @@
 import { ConfigProvider, theme } from 'antd';
 import type { ReactNode } from 'react';
-import Loader from '~/components/loader';
+import Loader from '~/components/Loader';
 import { useAntdTheme } from '~/stores/ThemeAntd';
 // import Loader from '@talab/ui/modules/common/loader/index';
 
