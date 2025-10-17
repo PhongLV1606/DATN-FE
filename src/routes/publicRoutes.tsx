@@ -2,6 +2,7 @@ import { Home } from 'lucide-react';
 import MainLayout from '~/layouts/MainLayout';
 import LoginPage from '~/pages/LoginPage';
 import RegisterPage from '~/pages/RegisterPage';
+import ProductDetailPage from '~/pages/ProductDetailPage';
 
 const publicRoutes = [
     {
@@ -21,6 +22,10 @@ const publicRoutes = [
     {
         path: '/register',
         element: <RegisterPage />,
+    },
+    {
+        path: '/product/:id',
+        element: <ProductDetailPage />,
     },
 ];
 
