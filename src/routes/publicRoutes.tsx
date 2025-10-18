@@ -1,7 +1,10 @@
 import { Home } from 'lucide-react';
 import MainLayout from '~/layouts/MainLayout';
+import LoginPage from '~/pages/LoginPage';
+import RegisterPage from '~/pages/RegisterPage';
+import ProductDetailPage from '~/pages/ProductDetailPage';
 
-const privateRoutes = [
+const publicRoutes = [
     {
         path: '/',
         element: <MainLayout />,
@@ -12,6 +15,18 @@ const privateRoutes = [
             },
         ],
     },
+    {
+        path: '/login',
+        element: <LoginPage />,
+    },
+    {
+        path: '/register',
+        element: <RegisterPage />,
+    },
+    {
+        path: '/product/:id',
+        element: <ProductDetailPage />,
+    },
 ];
 
-export default privateRoutes;
+export default publicRoutes;
