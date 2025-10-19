@@ -1,10 +1,10 @@
+import { Check, Heart, Minus, Plus, RotateCcw, Shield, ShoppingCart, Star, Truck } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from '~/components/ui/button';
 import { Badge } from '~/components/ui/badge';
+import { Button } from '~/components/ui/button';
 import { Card, CardContent } from '~/components/ui/card';
 import { Separator } from '~/components/ui/separator';
-import { Star, Heart, ShoppingCart, Truck, Shield, RotateCcw, Check, Minus, Plus } from 'lucide-react';
 
 export default function ProductDetailPage() {
     const [selectedImage, setSelectedImage] = useState(0);
@@ -21,7 +21,7 @@ export default function ProductDetailPage() {
         discount: 14,
         rating: 4.8,
         reviews: 1234,
-        inStock: true,
+        inquantity: true,
         images: [
             'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=800&q=80',
             'https://images.unsplash.com/photo-1695048133082-ff8e5e3a6c0f?w=800&q=80',
@@ -155,8 +155,8 @@ export default function ProductDetailPage() {
                                 <Separator orientation='vertical' className='h-4' />
                                 <span className='text-muted-foreground text-sm'>{product.reviews} đánh giá</span>
                                 <Separator orientation='vertical' className='h-4' />
-                                <Badge variant={product.inStock ? 'default' : 'destructive'}>
-                                    {product.inStock ? 'Còn hàng' : 'Hết hàng'}
+                                <Badge variant={product.inquantity ? 'default' : 'destructive'}>
+                                    {product.inquantity ? 'Còn hàng' : 'Hết hàng'}
                                 </Badge>
                             </div>
                         </div>
@@ -245,11 +245,11 @@ export default function ProductDetailPage() {
                         </div>
 
                         <div className='flex gap-3'>
-                            <Button size='lg' className='flex-1' disabled={!product.inStock}>
+                            <Button size='lg' className='flex-1' disabled={!product.inquantity}>
                                 <ShoppingCart className='mr-2 size-5' />
                                 Thêm vào giỏ
                             </Button>
-                            <Button size='lg' variant='outline' className='flex-1' disabled={!product.inStock}>
+                            <Button size='lg' variant='outline' className='flex-1' disabled={!product.inquantity}>
                                 Mua ngay
                             </Button>
                         </div>

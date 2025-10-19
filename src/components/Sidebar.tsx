@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {
     IconChartBar,
     IconDashboard,
@@ -9,10 +8,11 @@ import {
     IconTags,
     IconUsers,
 } from '@tabler/icons-react';
-import { Sidebar, SidebarContent, SidebarFooter } from '~/components/ui/sidebar';
-import { NavMain } from '~/components/NavMain';
+import * as React from 'react';
 import { NavDocuments } from '~/components/NavDocument';
+import { NavMain } from '~/components/NavMain';
 import { NavUser } from '~/components/NavUser';
+import { Sidebar, SidebarContent, SidebarFooter } from '~/components/ui/sidebar';
 
 const data = {
     navMain: [
@@ -22,8 +22,8 @@ const data = {
             icon: IconDashboard,
         },
         {
-            title: 'Blog',
-            url: '/admin/post',
+            title: 'Sản phẩm',
+            url: '/admin/products',
             icon: IconListDetails,
         },
         {

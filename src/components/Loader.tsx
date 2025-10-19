@@ -21,7 +21,7 @@ const Loader = ({ className, style, full, space }: LoaderProps) => {
                 }}
                 className={cn(fullClass, className)}
             >
-                <Compass className='text-primary animate-spin' style={{ animationDuration: '0.5s' }} />
+                <Compass className='text-primary animate-spin' style={{ animationDuration: '0.7s' }} />
             </div>
         </div>
     );

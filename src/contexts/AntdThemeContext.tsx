@@ -1,11 +1,11 @@
 import { ConfigProvider, theme } from 'antd';
 import type { ReactNode } from 'react';
 import Loader from '~/components/Loader';
-import { useAntdTheme } from '~/stores/ThemeAntd';
+// import { useAntdTheme } from '~/stores/ThemeAntd';
 // import Loader from '@talab/ui/modules/common/loader/index';
 
 export default function AntdThemeContext({ children }: { children: ReactNode }) {
-    const isDark = useAntdTheme((state) => state.isDark);
+    // const isDark = useAntdTheme((state) => state.isDark);
     return (
         <ConfigProvider
             spin={{
@@ -13,7 +13,7 @@ export default function AntdThemeContext({ children }: { children: ReactNode }) 
             }}
             theme={{
                 cssVar: true,
-                algorithm: isDark ? theme.darkAlgorithm : theme.defaultAlgorithm,
+                algorithm: theme.defaultAlgorithm,
                 token: {
                     colorPrimary: '#ff6a35',
                     colorInfo: '#ff6a35',
