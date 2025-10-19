@@ -1,5 +1,6 @@
 import AdminLayout from '~/layouts/AdminLayout';
-import DashboardPage from '~/pages/DashboardPage';
+import DashboardPage from '~/pages/admin/DashboardPage';
+import ProductList from '~/pages/admin/product/ProductList';
 import { Suspense } from '~/routes/lazy';
 
 const privateRoutes = [
@@ -14,6 +15,10 @@ const privateRoutes = [
                         <DashboardPage />
                     </Suspense>
                 ),
+            },
+            {
+                path: '/admin/products',
+                element: <ProductList />,
             },
         ],
     },

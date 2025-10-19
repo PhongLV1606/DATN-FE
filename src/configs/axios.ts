@@ -23,9 +23,9 @@ const axiosOptions = {
     baseURL: import.meta.env.VITE_REACT_API_URL,
     withCredentials: true,
 };
-const instance = axios.create(axiosOptions);
+const axiosInstance = axios.create(axiosOptions);
 
-instance.interceptors.request.use(
+axiosInstance.interceptors.request.use(
     (config) => {
         const accessToken = getAccessToken();
 
@@ -38,11 +38,11 @@ instance.interceptors.request.use(
     (error) => Promise.reject(error)
 );
 
-instance.interceptors.response.use(
+axiosInstance.interceptors.response.use(
     (config) => config,
     async (error) => {
         throw error;
     }
 );
 
-export default instance;
+export default axiosInstance;
