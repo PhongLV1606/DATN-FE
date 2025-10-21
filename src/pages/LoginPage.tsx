@@ -1,19 +1,42 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { message } from 'antd';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card';
 import { Eye, EyeOff, Mail, Lock, Smartphone } from 'lucide-react';
+import { authService } from '~/services/auth.service';
+import { setAccessToken, setUserInfo } from '~/configs/axios';
 
 export default function LoginPage() {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Xử lý đăng nhập ở đây
-        console.log('Login:', { email, password });
+        setIsLoading(true);
+
+        try {
+            const response = await authService.login({ email, password });
+
+            setAccessToken(response.data.accessToken);
+            setUserInfo(response.data.user);
+
+            message.success(response.message || 'Đăng nhập thành công!');
+
+            setTimeout(() => {
+                navigate('/');
+            }, 1000);
+        } catch (error: any) {
+            console.error('Login error:', error);
+            const errorMessage = error?.response?.data?.message || 'Đăng nhập thất bại. Vui lòng thử lại!';
+            message.error(errorMessage);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -109,8 +132,8 @@ export default function LoginPage() {
                                     </div>
                                 </div>
 
-                                <Button type='submit' className='w-full'>
-                                    Đăng nhập
+                                <Button type='submit' className='w-full' disabled={isLoading}>
+                                    {isLoading ? 'Đang đăng nhập...' : 'Đăng nhập'}
                                 </Button>
                             </form>
 

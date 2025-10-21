@@ -1,33 +1,55 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { message } from 'antd';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card';
 import { Eye, EyeOff, Mail, Lock, User, Phone, Smartphone } from 'lucide-react';
+import { authService } from '~/services/auth.service';
 
 export default function RegisterPage() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [formData, setFormData] = useState({
-        name: '',
+        userName: '',
         email: '',
         phone: '',
         password: '',
         confirmPassword: '',
     });
+    const navigate = useNavigate();
 
     const handleChange = (field: string, value: string) => {
         setFormData((prev) => ({ ...prev, [field]: value }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
         if (formData.password !== formData.confirmPassword) {
-            // eslint-disable-next-line no-alert
-            alert('Mật khẩu xác nhận không khớp!');
+            message.error('Mật khẩu xác nhận không khớp!');
             return;
         }
-        console.log('Register:', formData);
+
+        setIsLoading(true);
+
+        try {
+            const { confirmPassword, ...registerData } = formData;
+            const response = await authService.register(registerData);
+
+            message.success(response.message || 'Đăng ký thành công!');
+
+            setTimeout(() => {
+                navigate('/login');
+            }, 1500);
+        } catch (error: any) {
+            console.error('Register error:', error);
+            const errorMessage = error?.response?.data?.message || 'Đăng ký thất bại. Vui lòng thử lại!';
+            message.error(errorMessage);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -85,8 +107,8 @@ export default function RegisterPage() {
                                             id='name'
                                             type='text'
                                             placeholder='Nguyễn Văn A'
-                                            value={formData.name}
-                                            onChange={(e) => handleChange('name', e.target.value)}
+                                            value={formData.userName}
+                                            onChange={(e) => handleChange('userName', e.target.value)}
                                             className='pl-10'
                                             required
                                         />
@@ -197,8 +219,8 @@ export default function RegisterPage() {
                                     </Link>
                                 </div>
 
-                                <Button type='submit' className='w-full'>
-                                    Đăng ký
+                                <Button type='submit' className='w-full' disabled={isLoading}>
+                                    {isLoading ? 'Đang đăng ký...' : 'Đăng ký'}
                                 </Button>
                             </form>
 
